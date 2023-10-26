@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -27,14 +30,19 @@
         });
       </script>
   
-      <form action="#" onsubmit="return false;" id="form">
-        <div class="btn" style="align-items: center;justify-content: center;display: flex;">
-          <input type="submit" value="Save" id="save-button">
-          <input type="submit" value="Show" id="show-button">
+<!--      <form action="#" onsubmit="return false;" id="form">-->
+    <div class="btn" style="align-items: center;justify-content: center;display: flex;">
+      <form method="POST"
+              th:action="@{/}"
+              th:object="${Form}"
+              role="form">
+
+
+        <button type="submit"  id="save-button">Save</button>
   
-        </div>
       </form>
-   
+    </div>
+
       
       <script>
         let jsonDataArray = [];
