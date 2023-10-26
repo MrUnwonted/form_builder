@@ -1,23 +1,29 @@
 package com.camerinfolks.form.controller;
 
+import com.camerinfolks.form.model.Form;
+import com.camerinfolks.form.service.FormService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/form")
 public class FormController {
+
+    public FormService formService;
 
     @GetMapping("/")
     public String getIndex(){
         return "index";
     }
 
-    @PostMapping("/save")
-    public void saveForm(){
-
+    @PostMapping( value = "/save")
+    public String saveForm(@ModelAttribute("Form")Form form){
+          formService.saveForm(form);
+        return ("redirect:/index");
     }
 
 }

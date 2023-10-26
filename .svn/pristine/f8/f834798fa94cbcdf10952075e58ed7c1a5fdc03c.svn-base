@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#00000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+
+    <title>React App</title>
+
+
+
+  </head>
+  <body>
+    <div id="fb-editor"></div>
+
+    <script>
+        jQuery(function($) {
+          $(document.getElementById('fb-editor')).formBuilder();
+        });
+      </script>
+  
+<!--      <form action="#" onsubmit="return false;" id="form">-->
+    <div class="btn" style="align-items: center;justify-content: center;display: flex;">
+      <form method="POST"
+              th:action="@{/}"
+              th:object="${Form}"
+              role="form">
+
+
+        <button type="submit"  id="save-button">Save</button>
+  
+      </form>
+    </div>
+
+      
+      <script>
+        let jsonDataArray = [];
+        let jsonArray = [];
+        let formData = [];
+      
+        // Event handler for the form submission
+        $('#save-button').click(function() {
+          formData = JSON.stringify($(document.getElementById('fb-editor')).formBuilder('getData'));
+          jsonDataArray.push(formData);
+          alert('Data saved!');
+      
+          // Try to parse the form data to JSON
+          try {
+            jsonArray = JSON.parse(formData);
+          } catch (error) {
+            // Handle the error here
+          }
+      
+          // Log the JSON data to the console
+          if (jsonArray) {
+            console.log(jsonArray);
+          }
+        });
+      </script>
+      
+      
+
+</body>
+</html>
